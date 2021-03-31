@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { setTest } from './redux/test/test.actions';
+import { selectTestTest } from './redux/test/text.selectors';
 
 function App() {
+  const dispatch = useDispatch()
+  const selectTest = useSelector(selectTestTest)
+
+  useEffect(() => {
+    const func = async () => {
+      await dispatch(setTest([1, 2]))
+
+    }
+    func() 
+    // return () => {
+    //   cleanup
+    // }
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {selectTest?.map((item, index) => <div key={index}>{item}</div>)}
     </div>
   );
 }
